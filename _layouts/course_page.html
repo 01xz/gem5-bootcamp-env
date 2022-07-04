@@ -1,0 +1,45 @@
+---
+layout: base
+---
+{% assign module=page.categories[1] %}
+<div class="container-fluid d-flex flex-grow-1 flex-column">
+  <div class="row flex-grow-1">
+		{% include side_toolbar.html %}
+		<div class="col-xl-6 col-md-9">
+			<div class="content p-md-2">
+				<h1> {{ page.title }} </h1>
+				{% if page.embed_link == null %} <div> </div>
+				{% else %} <iframe src="{{ page.embed_link }}" width="476px" height="288px" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> presentation, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
+				{% endif %}
+				{% if page.slides_link == null %} <div> </div>
+				{% else %} <div> <span> Download the slides </span> <a href="{{ page.slides_link }}"> here </a> <span>.</span> <p></p> 
+				</div>
+				{% endif %}
+				{{ content }}
+				{% if page.discussion %} {% include prompt.html content="<p>General discussion</p>" %} {% endif %}
+				{% include next_in_module.html %}
+				{% if prev or next %}<hr />{% endif %}
+        <div class="row">
+					<div class="pagination-section col-sm-6">
+				{% if prev %}
+						<div class="title">
+							Previous submodule:
+						</div>
+						<a rel="prev" class="prev" href="{{ site.baseurl }}{{ prev.url }}">
+							{{ prev.title }} </a>
+				{% endif %}
+					</div>
+				{% if next %}
+					<div class="pagination-section text-sm-right col-sm-6">
+						<div class="title">
+							Next submodule:
+						</div>
+						<a rel="next" class="next" href="{{ site.baseurl }}{{ next.url }}"> {{ next.title }}
+						</a>
+					</div>
+				{% endif %}
+        </div>
+			</div>
+		</div>
+  </div>
+</div>
